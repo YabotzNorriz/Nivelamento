@@ -44,10 +44,6 @@ try:
         extensao_arquivo = identificar_extensao_arquivo(nome_arquivo)
         if "pdf" in nome_arquivo:
             arquivos_encontrados.append(nome_arquivo)
-            pasta = "./anexos"
-            os.makedirs(pasta, exist_ok=True)
-            path_completo = os.path.join(pasta, nome_arquivo)
-
         else:
             os.remove(nome_arquivo)
             print("Arquivo removido: " + nome_arquivo + "\ntipo" + extensao_arquivo)

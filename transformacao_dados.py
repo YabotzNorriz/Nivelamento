@@ -8,11 +8,11 @@ try:
     reader = PdfReader(arquivo_pdf)
 
     with open(arquivo_csv, mode="w", newline="", encoding="utf-8") as file_csv:
-        writer_csv = csv.writer(arquivo_csv)
+        writer_csv = csv.writer(file_csv)
 
         for pagina in reader.pages:
             texto = pagina.extract_text()
-            if texto:
+            if texto.strip():
                 linhas = texto.split("\n")
                 for linha in linhas:
                     writer_csv.writerow([linha])
