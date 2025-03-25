@@ -1,33 +1,29 @@
-from PyPDF2 import PdfReader
+import pdfplumber
 import pandas as pd
 
-ARQUIVO_PDF = "anexos/Anexo_I_Rol_2021RN_465.2021_RN627L.2024.pdf"
-dados_extraidos = []
+
+arquivo_pdf = "anexos/Anexo_I_teste.pdf"
+
+tabelas_extraidas = []
 
 try:
-    reader = PdfReader(ARQUIVO_PDF)
+    with pdfplumber.open(arquivo_pdf) as pdf:
+        for pagina in pdf.pages:
+            tabelas = pagina.extract_tables()
+            for tabela in tabelas:
+                tabelas_extraidas.extend(tabela)
 
-    for pagina in reader.pages:
-        texto = pagina.extract_text()
-        if texto.strip():
-            linhas = texto.split("\n")
-            for linha in linhas:
-                dados_extraidos.append(linha.strip())
+    data_frame = pd.DataFrame(tabelas_extraidas)
 
-    data_frame = pd.DataFrame(dados_extraidos, columns=["Dados brutos"])
+    arquivo_excel = "tabelas_extraidas.xlsx"
+    data_frame.to_excel(arquivo_excel, index=False, header=False)
 
-    data_frame_limpo = data_frame["Dados brutos"].str.split(";", expand=True)
-    data_frame_limpo.columns = [
-        "Coluna 1",
-        "Coluna 2",
-        "Coluna 3",
-        "Coluna 5",
-        "Coluna 5",
-    ]
+    data_frame = pd.read_excel(arquivo_excel, header=None)
+    data_frame.columns = data_frame.iloc[0]
+    data_frame = data_frame[1:]
 
-    arquivo_csv = "saida.csv"
-    data_frame_limpo.to_csv(arquivo_csv, index=False, encoding="utf-8")
-    print("Arquivo: " + arquivo_csv)
+    arquivo_csv = "tabela_normalizada.csv"
+    data_frame.to_csv(arquivo_csv, index=False, encoding="utf-8")
 
-except IOError as e:
-    print("Ocorreu um erro: " + e)
+except PermissionError as e:
+    print(f"Ocorreu um erro ao processar o PDF: {e}")
