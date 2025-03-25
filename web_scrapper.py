@@ -48,8 +48,6 @@ try:
             os.makedirs(pasta, exist_ok=True)
             path_completo = os.path.join(pasta, nome_arquivo)
 
-            with open(path_completo, "w") as arquivo:
-                arquivo.write(nome_arquivo)
         else:
             os.remove(nome_arquivo)
             print("Arquivo removido: " + nome_arquivo + "\ntipo" + extensao_arquivo)
