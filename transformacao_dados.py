@@ -1,29 +1,40 @@
 import pdfplumber
 import pandas as pd
 
+ARQUIVO_PDF = "anexos/Anexo_I_Rol_2021RN_465.2021_RN627L.2024.pdf"
 
-arquivo_pdf = "anexos/Anexo_I_teste.pdf"
+ARQUIVO_CSV = "Rol_de_Procedimentos_e_Eventos.csv"
 
-tabelas_extraidas = []
+mapa_OD = {"OD": "Ordem de Despesa"}
+mapa_AMB = {"AMB": "Ambulatorial"}
 
-try:
-    with pdfplumber.open(arquivo_pdf) as pdf:
-        for pagina in pdf.pages:
-            tabelas = pagina.extract_tables()
-            for tabela in tabelas:
-                tabelas_extraidas.extend(tabela)
+dados_processados = []
+header = None
 
-    data_frame = pd.DataFrame(tabelas_extraidas)
+with pdfplumber.open(ARQUIVO_PDF) as pdf:
+    for pagina in pdf.pages:
+        tabelas = pagina.extract_tables()
+        for linha in tabelas:
+            if linha and len(linha) > 0:
+                if header is None:
+                    header = linha[0]
+                    dados_processados.extend(linha)
+                else:
+                    if linha[0] == header:
+                        dados_processados.extend(linha[1:])
+                    else:
+                        dados_processados.extend(linha)
 
-    arquivo_excel = "tabelas_extraidas.xlsx"
-    data_frame.to_excel(arquivo_excel, index=False, header=False)
 
-    data_frame = pd.read_excel(arquivo_excel, header=None)
-    data_frame.columns = data_frame.iloc[0]
-    data_frame = data_frame[1:]
+if header is None:
+    print("Nenhum dado extraído do PDF.")
+else:
+    data_frame = pd.DataFrame(dados_processados[1:], columns=header)
 
-    arquivo_csv = "tabela_normalizada.csv"
-    data_frame.to_csv(arquivo_csv, index=False, encoding="utf-8")
+    if "OD" in data_frame.columns:
+        data_frame["OD"] = data_frame["OD"].replace(mapa_OD)
+    if "AMB" in data_frame.columns:
+        data_frame["AMB"] = data_frame["AMB"].replace(mapa_AMB)
 
-except PermissionError as e:
-    print(f"Ocorreu um erro ao processar o PDF: {e}")
+    data_frame.to_csv(ARQUIVO_CSV, index=False, encoding="utf-8")
+    print("Dados extraídos e salvos com sucesso em: " + ARQUIVO_CSV)
