@@ -1,23 +1,33 @@
 from PyPDF2 import PdfReader
-import csv
+import pandas as pd
 
-arquivo_pdf = "anexos/Anexo_I_Rol_2021RN_465.2021_RN627L.2024.pdf"
-arquivo_csv = "saida.csv"
+ARQUIVO_PDF = "anexos/Anexo_I_Rol_2021RN_465.2021_RN627L.2024.pdf"
+dados_extraidos = []
 
 try:
-    reader = PdfReader(arquivo_pdf)
+    reader = PdfReader(ARQUIVO_PDF)
 
-    with open(arquivo_csv, mode="w", newline="", encoding="utf-8") as file_csv:
-        writer_csv = csv.writer(file_csv)
+    for pagina in reader.pages:
+        texto = pagina.extract_text()
+        if texto.strip():
+            linhas = texto.split("\n")
+            for linha in linhas:
+                dados_extraidos.append(linha.strip())
 
-        for pagina in reader.pages:
-            texto = pagina.extract_text()
-            if texto.strip():
-                linhas = texto.split("\n")
-                for linha in linhas:
-                    writer_csv.writerow([linha])
+    data_frame = pd.DataFrame(dados_extraidos, columns=["Dados brutos"])
 
-    print("Dados salvos em: " + arquivo_csv)
+    data_frame_limpo = data_frame["Dados brutos"].str.split(";", expand=True)
+    data_frame_limpo.columns = [
+        "Coluna 1",
+        "Coluna 2",
+        "Coluna 3",
+        "Coluna 5",
+        "Coluna 5",
+    ]
+
+    arquivo_csv = "saida.csv"
+    data_frame_limpo.to_csv(arquivo_csv, index=False, encoding="utf-8")
+    print("Arquivo: " + arquivo_csv)
 
 except IOError as e:
     print("Ocorreu um erro: " + e)
