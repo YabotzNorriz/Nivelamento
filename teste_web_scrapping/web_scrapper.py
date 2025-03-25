@@ -2,6 +2,7 @@ import os
 import zipfile
 import requests
 from bs4 import BeautifulSoup
+import shutil
 
 URL_SITE = "https://www.gov.br/ans/pt-br/acesso-a-informacao/participacao-da-sociedade/atualizacao-do-rol-de-procedimentos"
 
@@ -48,14 +49,14 @@ try:
             os.remove(nome_arquivo)
             print("Arquivo removido: " + nome_arquivo + "\ntipo" + extensao_arquivo)
 
-    arquivo_compactado = "anexos.zip"
+    arquivo_compactado = "./anexos.zip"
     with zipfile.ZipFile(arquivo_compactado, "w") as zip:
         for arquivo in arquivos_encontrados:
             zip.write(arquivo)
     print(arquivo_compactado + " criado com sucesso!")
 
     for nome_arquivo in arquivos_encontrados:
-        os.remove(nome_arquivo)
+        shutil.move(nome_arquivo, os.path.join("resources/anexos", nome_arquivo))
     print("Os arquivos originais foram removidos")
 
 except requests.exceptions.RequestException as e:
