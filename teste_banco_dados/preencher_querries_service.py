@@ -4,16 +4,21 @@ from mysql.connector import Error
 
 
 def preencher_cadastro_operadoras(conexao, cursor):
-    arquivo = "resources/Relatorio_cadop - Relatorio_cadop.csv"
+    arquivo = "C:/Users/João Pedro Paes/Documents/Github/Nivelamento/resources/Relatorio_cadop - Relatorio_cadop.csv"
     if arquivo.endswith(".csv"):
         query = f"""
             LOAD DATA INFILE '{arquivo}'
-            INTO TABLE contas_financeiras
-            FIELDS TERMINATED BY ';'
-            ENCLOSED BY '"'
-            LINES TERMINATED BY '\\n'
+            INTO TABLE cadastro_operadoras
+            FIELDS TERMINATED BY ','
+            OPTIONALLY ENCLOSED BY '"'
+            LINES TERMINATED BY '\n'
             IGNORE 1 ROWS
-            (DATA, REG_ANS, CD_CONTA_CONTABIL, DESCRICAO, VL_SALDO_INICIAL, VL_SALDO_FINAL);
+            (REGISTRO_ANS,CNPJ,RAZAO_SOCIAL,NOME_FANTASIA,MODALIDADE,LOGRADOURO,
+            NUMERO,COMPLEMENTO,BAIRRO, CIDADE,UF,CEP, DDD,TELEFONE,FAX,
+            ENDERECO_ELETRONICO, REPRESENTANTE,CARGO_REPRESENTANTE,
+            REGIAO_DE_COMERCIALIZACAO,@VAR_DATA_REGISTRO_ANS)
+            SET DATA_REGISTRO_ANS =
+            STR_TO_DATE(@VAR_DATA_REGISTRO_ANS, '%Y-%M-%D');
             """
         try:
             cursor.execute(query)
@@ -23,13 +28,13 @@ def preencher_cadastro_operadoras(conexao, cursor):
 
 
 def preencher_contas_financeiras(conexao, cursor):
-    pasta = "resources/anexos/"
+    pasta = "C:/Users/João Pedro Paes/Documents/Github/Nivelamento/resources/databases/"
 
     for arquivo in os.listdir(pasta):
         if arquivo.endswith(".csv"):
             caminho_arquivo = os.path.join(pasta, arquivo)
             query = f"""
-            LOAD DATA INFILE '{caminho_arquivo}'
+            LOAD DATA LOCAL INFILE "{caminho_arquivo}"
             INTO TABLE contas_financeiras
             FIELDS TERMINATED BY ';'
             ENCLOSED BY '"'
