@@ -1,0 +1,40 @@
+{
+	"info": {
+		"_postman_id": "bcb4d0e6-1287-4a89-9193-eeb31236bd64",
+		"name": "Operadoras API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43507469"
+	},
+	"item": [
+		{
+			"name": "request - operadora",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/busca?query=operadora",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"busca"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "operadora",
+							"description": ""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
