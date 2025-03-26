@@ -3,13 +3,23 @@ import Lista from './components/Lista.vue';
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <Lista />
-    </div>
-  </header>
+
+  <div class="wrapper">
+    <Lista />
+  </div>
+
 </template>
 
-<style scoped>
+<style>
+body {
+  background-color: #eef2f5
+}
 
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+}
 </style>
