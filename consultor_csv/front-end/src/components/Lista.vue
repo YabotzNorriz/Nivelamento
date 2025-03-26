@@ -116,18 +116,20 @@ input {
 table {
   width: 100%;
   border-collapse: collapse;
-  border: 1px solid #000000;
+  border: 1px solid #BDBDBD;
 }
 
 td {
-  border: 1px solid #000000;
+  border: 1px solid #BDBDBD;
   padding: 8px;
+
 }
 
 th {
-  border: 1px solid #000000;
+  border: 1px solid #BDBDBD;
   padding: 8px;
-  background-color: #ccc;
+  background-color: #9b9b9b;
+  color: #ffffff;
 }
 
 tbody tr:nth-child(even) {
@@ -135,7 +137,7 @@ tbody tr:nth-child(even) {
 }
 
 tbody tr:nth-child(odd) {
-  background-color: #fff9f9;
+  background-color: #F0F0F0;
 }
 
 .sem-resultados {

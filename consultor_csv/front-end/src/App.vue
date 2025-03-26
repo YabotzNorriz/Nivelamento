@@ -29,7 +29,7 @@ body {
 }
 
 footer {
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 10px 0;
   text-align: center;
   align-items: center;
