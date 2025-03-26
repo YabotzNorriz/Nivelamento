@@ -170,3 +170,33 @@ SET
     `DATA` = STR_TO_DATE(@var_DATA, '%Y-%m-%d'),
     VL_SALDO_INICIAL = REPLACE(@var_VL_SALDO_INICIAL, ',', '.'),
     VL_SALDO_FINAL = REPLACE(@var_VL_SALDO_FINAL, ',', '.');
+    
+-- Quais as 10 operadoras com maiores despesas em no último trimestre?
+SELECT 
+    REG_ANS AS Operadora, 
+    SUM(CAST(REPLACE(VL_SALDO_FINAL, ',', '.') AS DECIMAL(15,2))) AS Total_Despesas
+FROM 
+    contas_financeiras
+WHERE 
+	DESCRICAO LIKE "%EVENTOS/ SINISTROS CONHECIDOS OU AVISADOS  DE ASSISTÊNCIA A SAÚDE MEDICO HOSPITALAR%"
+    AND STR_TO_DATE(DATA, '%Y-%m-%d') BETWEEN '2024-10-01' AND '2024-12-31'
+GROUP BY 
+    REG_ANS
+ORDER BY 
+    Total_Despesas DESC
+LIMIT 10;
+
+-- Quais as 10 operadoras com maiores despesas em no último ano?
+SELECT 
+    REG_ANS AS Operadora, 
+    SUM(CAST(REPLACE(VL_SALDO_FINAL, ',', '.') AS DECIMAL(15,2))) AS Total_Despesas
+FROM 
+    contas_financeiras
+WHERE 
+	DESCRICAO LIKE "%EVENTOS/ SINISTROS CONHECIDOS OU AVISADOS  DE ASSISTÊNCIA A SAÚDE MEDICO HOSPITALAR%"
+    AND STR_TO_DATE(DATA, '%Y-%m-%d') BETWEEN '2024-01-01' AND '2024-12-31'
+GROUP BY 
+    REG_ANS
+ORDER BY 
+    Total_Despesas DESC
+LIMIT 10;
