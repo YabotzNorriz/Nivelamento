@@ -24,7 +24,8 @@
             <td>{{ operadora.Logradouro }}, {{ operadora.Numero }}, {{ operadora.Complemento }} - {{ operadora.Bairro }}
             </td>
             <td>{{ operadora.Cidade }} / {{ operadora.UF }}</td>
-            <td v-if="operadora.Telefone != ''">({{ operadora.DDD }}) {{ operadora.Telefone }} / {{ operadora.Fax ||
+            <td v-if="operadora.Telefone != ''">({{ operadora.DDD || "Não informado" }}) {{ operadora.Telefone }} / {{
+              operadora.Fax ||
               "Não informado" }}
             </td>
             <td v-else>{{ "Não informado" }}</td>
