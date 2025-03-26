@@ -1,1 +1,7 @@
+# Ignorar o diretório do ambiente virtual do 
+/venv/
 
+
+
+# Ignorar o diretório do pycache
+consultor_csv/back-end/__pycache__
