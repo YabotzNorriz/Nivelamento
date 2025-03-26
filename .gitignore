@@ -1,7 +1,10 @@
-# Ignorar o diretório do ambiente virtual do 
-/venv/
+# Ignorar o diretório do ambiente virtual
+venv
 
 
 
 # Ignorar o diretório do pycache
 consultor_csv/back-end/__pycache__
+
+# Ignorar o diretório do ambiente virtual do Flask
+consultor_csv/back-end/.venv
