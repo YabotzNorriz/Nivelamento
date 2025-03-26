@@ -8,18 +8,32 @@ import Lista from './components/Lista.vue';
     <Lista />
   </div>
 
+  <footer>
+    <p>Feito por: João Pedro Andrade Paes Pimentel Barbosa</p>
+  </footer>
+
 </template>
 
 <style>
 body {
-  background-color: #eef2f5
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
 }
 
-.wrapper {
+#app {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+footer {
+  background-color: #fff;
+  padding: 10px 0;
+  text-align: center;
   align-items: center;
-
-
+  border-top: 1px solid #ccc;
+  margin-top: auto;
 }
 </style>
