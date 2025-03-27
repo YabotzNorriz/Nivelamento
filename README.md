@@ -91,6 +91,11 @@ O site utiliza __Flask__ como backend e __Vue.js__ como frontend. Ele permite:
 
 - Flask
 - Vue.js
+- Postman
+
+#### Postman
+
+Todos os testes de API do postman estão na pasta `colecao-postman` dentro da pasta `consultor_csv`
 
 ___
 
