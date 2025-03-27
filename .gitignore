@@ -1,8 +1,19 @@
 # Ignorar o diretório do ambiente virtual
-venv/
+venv
 
 # Ignorar o diretório do pycache
 consultor_csv/back-end/__pycache__
 
 # Ignorar o diretório do ambiente virtual do Flask
 consultor_csv/back-end/.venv
+<<<<<<< Updated upstream
+=======
+
+Rol_de_Procedimentos_e_Eventos.csv
+
+resources/Teste_JoaoPedroAndradePaesPimentelBarbosa.zip
+
+resources/Rol_de_Procedimentos_e_Eventos.csv
+
+resources/anexos.zip
+>>>>>>> Stashed changes

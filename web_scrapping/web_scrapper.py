@@ -49,7 +49,7 @@ try:
             os.remove(nome_arquivo)
             print("Arquivo removido: " + nome_arquivo + "\ntipo" + extensao_arquivo)
 
-    arquivo_compactado = "anexos.zip"
+    arquivo_compactado = "resources/anexos.zip"
     with zipfile.ZipFile(arquivo_compactado, "w") as zip:
         for arquivo in arquivos_encontrados:
             zip.write(arquivo)
