@@ -4,7 +4,7 @@ import pandas as pd
 
 ARQUIVO_PDF = "resources/anexos/Anexo_I_Rol_2021RN_465.2021_RN627L.2024.pdf"
 
-ARQUIVO_CSV = "../Resources/Rol_de_Procedimentos_e_Eventos.csv"
+ARQUIVO_CSV = "resources/Rol_de_Procedimentos_e_Eventos.csv"
 
 mapa_OD = {"OD": "Ordem de Despesa"}
 mapa_AMB = {"AMB": "Ambulatorial"}
@@ -40,14 +40,14 @@ try:
         data_frame.to_csv(ARQUIVO_CSV, index=False, encoding="utf-8")
         print("Dados extraídos e salvos com sucesso em: " + ARQUIVO_CSV)
 
-    arquivo_compactado = "Teste_JoaoPedroAndradePaesPimentelBarbosa.zip"
+    arquivo_compactado = "resources/Teste_JoaoPedroAndradePaesPimentelBarbosa.zip"
     with zipfile.ZipFile(arquivo_compactado, "w") as zip:
         zip.write(ARQUIVO_CSV)
     print(arquivo_compactado + " criado com sucesso!")
 
 except PermissionError as e:
-    print("Permição negada: " + e)
+    print(e)
 except IOError as f:
-    print("Algum erro aconteceu: " + f)
+    print(f)
 except FileNotFoundError as g:
-    print("Arquivo não encontrado" + g)
+    print(g)
