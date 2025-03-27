@@ -74,7 +74,8 @@ Além disso, ele carrega dados diretamente de arquivos CSV.
 #### Como Usar
 
 1. Configure o MySQL.
-2. Execute o arquivo .sql no MySQL Workbench.
+2. Coloque os CSV na pasta do MySQL "Uploads", por padrão esse é o _path_: `C:\ProgramData\MySQL\MySQL Server 8.0\Uploads`
+3. Execute o arquivo .sql no MySQL Workbench.
 
 ### Carregamento de Tabelas com Python
 
