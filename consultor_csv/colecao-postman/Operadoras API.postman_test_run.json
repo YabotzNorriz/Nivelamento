@@ -1,0 +1,66 @@
+{
+	"id": "268e056d-403c-4ad0-8106-6231e15e262c",
+	"name": "Operadoras API",
+	"timestamp": "2025-03-26T22:14:30.432Z",
+	"collection_id": "43507469-bcb4d0e6-1287-4a89-9193-eeb31236bd64",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 0,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2025-03-26T22:14:29.853Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "33cc2a5e-663e-43fa-89d2-be7b05ff1a91",
+			"name": "request - operadora",
+			"url": "http://127.0.0.1:5000/api/busca?query=operadora",
+			"time": 22,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				22
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "a46a7e55-86a9-47ac-a293-36fd6c8df980",
+			"name": "request - medica",
+			"url": "http://127.0.0.1:5000/api/busca?query=medica",
+			"time": 23,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				23
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 45,
+	"collection": {
+		"requests": [
+			{
+				"id": "33cc2a5e-663e-43fa-89d2-be7b05ff1a91",
+				"method": "GET"
+			},
+			{
+				"id": "a46a7e55-86a9-47ac-a293-36fd6c8df980",
+				"method": "GET"
+			}
+		]
+	}
+}
